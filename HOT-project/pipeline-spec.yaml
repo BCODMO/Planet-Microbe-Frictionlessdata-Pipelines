@@ -1,0 +1,15 @@
+v02:
+  title: Data Packages for HOT Project Datasets
+  description: Download all the Frictionlessdata Pacakge JSON files for retrieving the datasets
+  pipeline:
+    -
+      run: load_metadata
+      parameters:
+        url: https://www.bco-dmo.org/project/2101/datapackage.json
+    -
+      run: stream_remote_resources
+      cache: True
+    -
+      run: dump.to_path
+      parameters:
+          out-path: dataset-packages
