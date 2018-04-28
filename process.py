@@ -40,10 +40,11 @@ def downloadResource(resource, directory, filename):
   if not os.path.exists(directory):
     raise Exception(directory + ' does not exist and could not be created')
 
-  socket_file = resource.raw_iter(stream=True)
-  data = socket_file.read()
   dir_file = os.path.join(directory, filename)
   print('Writing file: ' + dir_file)
+
+  socket_file = resource.raw_iter(stream=True)
+  data = socket_file.read()
   with open(dir_file, 'wb') as file:
     file.write(data)
 
