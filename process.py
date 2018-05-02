@@ -1,4 +1,5 @@
 from datapackage import Package
+from goodtables import validate
 import os
 
 # @param string path
@@ -22,6 +23,18 @@ def handleResource(resource, root_directory):
       handleDataResource(resource, root_directory)
 
 def handleDataPackageResource(resource, directory):
+  print(resource.source)
+  # order_fields ignores order mismatch with b/w source and schema
+  report = validate(resource.source, order_fields=True)
+  if report['valid']:
+    print ('Good Tables: Valid')
+  else:
+    print('Good Tables: ' + str(report['error-count']) + ' errors')
+    for i in range(len(report['tables'])):
+      print('ERRORS in ' + report['tables'][i]['source'])
+      for j in range(len(report['tables'][i]['errors'])):
+        print(' - ' + report['tables'][i]['errors'][j]['message'])
+
   resource_directory = os.path.join(directory, resource.descriptor['name'])
   dir_file = downloadResource(resource, resource_directory, os.path.basename(resource.source))
   print('Downloaded Data Package: ' + dir_file)
