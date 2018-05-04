@@ -1,11 +1,6 @@
 from datapackage import Package
 from goodtables import validate
 import os
-
-if __name__ == '__main__':
-  url = 'https://www.bco-dmo.org/project/2101/datapackage.json'
-  download_dir = './HOT-project'
-  handleDataPackage(path=url, root_directory=download_dir)
   
 # @param string path
 #   either a local file or a URL
@@ -84,3 +79,8 @@ def downloadResource(resource, directory, filename):
 
   return dir_file
 
+
+if __name__ == '__main__':
+  url = 'https://www.bco-dmo.org/project/2101/datapackage.json'
+  download_dir = './HOT-project'
+  handleDataPackage(path=url, root_directory=download_dir)
